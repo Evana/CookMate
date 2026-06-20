@@ -30,3 +30,11 @@ struct ServingsStepperView: View {
         return "Any number of servings"
     }
 }
+
+#Preview {
+    Form {
+        ServingsStepperView(viewModel: RecipeListViewModel(
+            repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+        ))
+    }
+}

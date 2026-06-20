@@ -92,3 +92,11 @@ private struct IngredientChip: Identifiable {
     let isInclude: Bool
     var id: String { "\(name)-\(isInclude)" }
 }
+
+#Preview {
+    Form {
+        IngredientChipInputView(viewModel: RecipeListViewModel(
+            repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+        ))
+    }
+}

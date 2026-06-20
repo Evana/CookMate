@@ -12,6 +12,12 @@ struct RecipeListView: View {
             if viewModel.isLoading && viewModel.recipes.isEmpty {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if let error = viewModel.error {
+                ContentUnavailableView(
+                    "Could Not Load Recipes",
+                    systemImage: "exclamationmark.triangle",
+                    description: Text(error.localizedDescription)
+                )
             } else if viewModel.recipes.isEmpty {
                 ContentUnavailableView(
                     "No Recipes Found",

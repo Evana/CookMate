@@ -33,3 +33,9 @@ struct FilterSheetView: View {
         }
     }
 }
+
+#Preview {
+    FilterSheetView(viewModel: RecipeListViewModel(
+        repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+    ))
+}

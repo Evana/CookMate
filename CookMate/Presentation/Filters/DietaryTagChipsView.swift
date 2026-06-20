@@ -18,3 +18,10 @@ struct DietaryTagChipsView: View {
         }
     }
 }
+
+#Preview {
+    DietaryTagChipsView(viewModel: RecipeListViewModel(
+        repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+    ))
+    .padding()
+}
