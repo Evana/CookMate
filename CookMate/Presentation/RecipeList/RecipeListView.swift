@@ -25,9 +25,9 @@ struct RecipeListView: View {
             }
         }
         .navigationTitle("Recipes")
-//        .navigationDestination(for: Recipe.self) { recipe in
-//            RecipeDetailView(recipe: recipe)
-//        }
+        .navigationDestination(for: Recipe.self) { recipe in
+            RecipeDetailView(recipe: recipe)
+        }
         .task {
             await viewModel.start()
         }
