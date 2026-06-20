@@ -13,10 +13,9 @@ struct FilterSheetView: View {
                 Section("Servings") {
                     ServingsStepperView(viewModel: viewModel)
                 }
-// TODO: Uncomment when IngredientChipInputView is added in Task 9
-//                Section("Ingredients") {
-//                    IngredientChipInputView(viewModel: viewModel)
-//                }
+                Section("Ingredients") {
+                    IngredientChipInputView(viewModel: viewModel)
+                }
             }
             .navigationTitle("Filters")
             .navigationBarTitleDisplayMode(.inline)
