@@ -10,6 +10,12 @@ struct RecipeListView: View {
             if viewModel.isLoading && viewModel.recipes.isEmpty {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if viewModel.recipes.isEmpty {
+                ContentUnavailableView(
+                    "No Recipes Found",
+                    systemImage: "fork.knife",
+                    description: Text("Try adjusting your search or filters.")
+                )
             } else {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 16) {
@@ -25,6 +31,13 @@ struct RecipeListView: View {
             }
         }
         .navigationTitle("Recipes")
+        .searchable(text: Binding(
+            get: { viewModel.query.searchText },
+            set: { viewModel.query.searchText = $0 }
+        ), prompt: "Search recipes")
+        .onChange(of: viewModel.query.searchText) {
+            viewModel.onQueryChanged()
+        }
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeDetailView(recipe: recipe)
         }

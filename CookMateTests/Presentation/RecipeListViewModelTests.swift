@@ -40,4 +40,20 @@ struct RecipeListViewModelTests {
         #expect(sut.error == nil)
         #expect(sut.recipes.count == 1)
     }
+
+    @Test func onQueryChanged_triggersLoad() async {
+        mockRepository.recipesToReturn = [.fixture(title: "Pasta")]
+        sut.query.searchText = "pasta"
+        sut.onQueryChanged()
+        try? await Task.sleep(for: .milliseconds(10))
+        #expect(sut.recipes.count == 1)
+    }
+
+    @Test func onQueryChanged_cancelsInFlight_whenCalledAgain() async {
+        mockRepository.recipesToReturn = [.fixture()]
+        sut.onQueryChanged()
+        sut.onQueryChanged()
+        try? await Task.sleep(for: .milliseconds(10))
+        #expect(sut.recipes.count == 1)
+    }
 }
