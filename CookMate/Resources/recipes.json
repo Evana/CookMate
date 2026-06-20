@@ -1,0 +1,187 @@
+[
+  {
+    "id": "11111111-1111-1111-1111-111111111111",
+    "title": "Spaghetti Carbonara",
+    "description": "A classic Roman pasta dish made with egg, hard cheese, cured pork, and black pepper.",
+    "servings": 4,
+    "ingredients": [
+      { "name": "spaghetti", "quantity": "200g" },
+      { "name": "pancetta", "quantity": "100g" },
+      { "name": "eggs", "quantity": "2 large" },
+      { "name": "pecorino romano", "quantity": "50g" },
+      { "name": "black pepper", "quantity": "1 tsp" }
+    ],
+    "instructions": [
+      "Cook spaghetti in salted boiling water until al dente.",
+      "Fry pancetta in a pan until crispy.",
+      "Whisk eggs with grated pecorino and black pepper.",
+      "Drain pasta, reserving some cooking water.",
+      "Remove pan from heat, add pasta to pancetta, then pour in egg mixture.",
+      "Toss quickly, adding pasta water to loosen. Serve immediately."
+    ],
+    "dietaryTags": []
+  },
+  {
+    "id": "22222222-2222-2222-2222-222222222222",
+    "title": "Avocado Toast",
+    "description": "Simple, nutritious toast topped with creamy avocado and a sprinkle of seasoning.",
+    "servings": 2,
+    "ingredients": [
+      { "name": "sourdough bread", "quantity": "2 slices" },
+      { "name": "avocado", "quantity": "1 ripe" },
+      { "name": "lemon juice", "quantity": "1 tbsp" },
+      { "name": "chilli flakes", "quantity": "pinch" },
+      { "name": "salt", "quantity": "to taste" }
+    ],
+    "instructions": [
+      "Toast the sourdough bread until golden.",
+      "Mash the avocado with lemon juice and salt.",
+      "Spread avocado mixture onto toast.",
+      "Top with chilli flakes and serve."
+    ],
+    "dietaryTags": ["vegetarian", "vegan", "dairyFree", "nutFree"]
+  },
+  {
+    "id": "33333333-3333-3333-3333-333333333333",
+    "title": "Chicken Tikka Masala",
+    "description": "Tender chicken in a rich, spiced tomato and cream sauce — a British-Indian classic.",
+    "servings": 6,
+    "ingredients": [
+      { "name": "chicken breast", "quantity": "700g" },
+      { "name": "yoghurt", "quantity": "150ml" },
+      { "name": "tomato passata", "quantity": "400ml" },
+      { "name": "double cream", "quantity": "100ml" },
+      { "name": "garam masala", "quantity": "2 tsp" },
+      { "name": "garlic", "quantity": "4 cloves" },
+      { "name": "ginger", "quantity": "1 inch" }
+    ],
+    "instructions": [
+      "Marinate chicken in yoghurt, garlic, ginger and spices for 1 hour.",
+      "Grill or pan-fry chicken until charred and cooked through.",
+      "Fry onions, garlic, and spices in a pan until fragrant.",
+      "Add passata and simmer for 15 minutes.",
+      "Stir in cream, add chicken, and simmer for 10 more minutes.",
+      "Serve with basmati rice or naan."
+    ],
+    "dietaryTags": ["glutenFree"]
+  },
+  {
+    "id": "44444444-4444-4444-4444-444444444444",
+    "title": "Mushroom Risotto",
+    "description": "Creamy Italian rice dish packed with earthy mushrooms and parmesan.",
+    "servings": 4,
+    "ingredients": [
+      { "name": "arborio rice", "quantity": "300g" },
+      { "name": "mixed mushrooms", "quantity": "300g" },
+      { "name": "vegetable stock", "quantity": "1L" },
+      { "name": "white wine", "quantity": "100ml" },
+      { "name": "parmesan", "quantity": "60g" },
+      { "name": "butter", "quantity": "30g" },
+      { "name": "onion", "quantity": "1 medium" }
+    ],
+    "instructions": [
+      "Sauté onion in butter until soft.",
+      "Add rice and toast for 2 minutes.",
+      "Add white wine and stir until absorbed.",
+      "Add stock one ladle at a time, stirring constantly until absorbed.",
+      "Fry mushrooms separately and fold in at the end.",
+      "Finish with extra butter and parmesan."
+    ],
+    "dietaryTags": ["vegetarian", "glutenFree"]
+  },
+  {
+    "id": "55555555-5555-5555-5555-555555555555",
+    "title": "Greek Salad",
+    "description": "A refreshing Mediterranean salad with crisp vegetables, olives, and feta.",
+    "servings": 2,
+    "ingredients": [
+      { "name": "cucumber", "quantity": "1 large" },
+      { "name": "tomatoes", "quantity": "3 large" },
+      { "name": "red onion", "quantity": "1 small" },
+      { "name": "kalamata olives", "quantity": "80g" },
+      { "name": "feta cheese", "quantity": "100g" },
+      { "name": "olive oil", "quantity": "3 tbsp" },
+      { "name": "dried oregano", "quantity": "1 tsp" }
+    ],
+    "instructions": [
+      "Chop cucumber, tomatoes, and red onion into chunks.",
+      "Combine vegetables and olives in a large bowl.",
+      "Drizzle generously with olive oil and sprinkle with oregano.",
+      "Top with crumbled feta cheese and serve."
+    ],
+    "dietaryTags": ["vegetarian", "glutenFree", "nutFree"]
+  },
+  {
+    "id": "66666666-6666-6666-6666-666666666666",
+    "title": "Thai Green Curry",
+    "description": "A fragrant, coconut-based Thai curry loaded with vegetables and aromatic herbs.",
+    "servings": 4,
+    "ingredients": [
+      { "name": "coconut milk", "quantity": "400ml" },
+      { "name": "green curry paste", "quantity": "2 tbsp" },
+      { "name": "tofu", "quantity": "300g" },
+      { "name": "courgette", "quantity": "1 large" },
+      { "name": "green beans", "quantity": "150g" },
+      { "name": "Thai basil", "quantity": "handful" },
+      { "name": "lime", "quantity": "1" },
+      { "name": "jasmine rice", "quantity": "300g" }
+    ],
+    "instructions": [
+      "Fry curry paste in a pan for 1 minute until fragrant.",
+      "Pour in coconut milk and bring to a gentle simmer.",
+      "Add tofu, courgette, and green beans.",
+      "Simmer for 10 minutes until vegetables are tender.",
+      "Finish with Thai basil and a squeeze of lime.",
+      "Serve over steamed jasmine rice."
+    ],
+    "dietaryTags": ["vegetarian", "vegan", "glutenFree", "dairyFree", "nutFree"]
+  },
+  {
+    "id": "77777777-7777-7777-7777-777777777777",
+    "title": "Beef Stir Fry",
+    "description": "Quick, high-heat beef and vegetable stir fry with a savory soy glaze.",
+    "servings": 4,
+    "ingredients": [
+      { "name": "beef sirloin", "quantity": "400g" },
+      { "name": "broccoli", "quantity": "200g" },
+      { "name": "red pepper", "quantity": "1 large" },
+      { "name": "soy sauce", "quantity": "3 tbsp" },
+      { "name": "sesame oil", "quantity": "1 tbsp" },
+      { "name": "garlic", "quantity": "3 cloves" },
+      { "name": "ginger", "quantity": "1 inch" }
+    ],
+    "instructions": [
+      "Slice beef thinly against the grain.",
+      "Heat wok until smoking hot, add a splash of oil.",
+      "Sear beef in batches until browned, then set aside.",
+      "Stir fry broccoli and pepper with garlic and ginger for 3 minutes.",
+      "Return beef to wok, add soy sauce and sesame oil.",
+      "Toss everything together and serve immediately."
+    ],
+    "dietaryTags": ["glutenFree", "dairyFree", "nutFree"]
+  },
+  {
+    "id": "88888888-8888-8888-8888-888888888888",
+    "title": "Banana Bread",
+    "description": "Moist, sweet loaf made with ripe bananas — perfect for using up overripe fruit.",
+    "servings": 8,
+    "ingredients": [
+      { "name": "ripe bananas", "quantity": "3 large" },
+      { "name": "plain flour", "quantity": "200g" },
+      { "name": "butter", "quantity": "100g" },
+      { "name": "sugar", "quantity": "150g" },
+      { "name": "eggs", "quantity": "2" },
+      { "name": "baking soda", "quantity": "1 tsp" },
+      { "name": "walnuts", "quantity": "80g" }
+    ],
+    "instructions": [
+      "Preheat oven to 180°C. Grease a 900g loaf tin.",
+      "Mash bananas thoroughly in a large bowl.",
+      "Cream butter and sugar, then beat in eggs one at a time.",
+      "Fold in mashed banana, flour, baking soda, and walnuts.",
+      "Pour into prepared tin and bake for 55–60 minutes.",
+      "Cool in tin for 10 minutes before turning out."
+    ],
+    "dietaryTags": ["vegetarian"]
+  }
+]
