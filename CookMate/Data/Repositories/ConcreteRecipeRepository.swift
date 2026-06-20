@@ -7,7 +7,7 @@ final class ConcreteRecipeRepository: RecipeRepository {
     }
 
     func fetchRecipes(query: RecipeQuery) async throws -> [Recipe] {
-        let recipes = try await dataSource.fetchRecipes().map { try Recipe(response: $0) }
+        let recipes = try await dataSource.fetchRecipes(query: query).map { try Recipe(response: $0) }
         return recipes.filter { matches($0, query: query) }
     }
 

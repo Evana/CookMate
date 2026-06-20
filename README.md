@@ -49,15 +49,15 @@ graph TD
 ```
 
 - **Domain** — pure Swift. `Recipe`, `RecipeQuery`, `DietaryTag`, `RecipeRepository` protocol. Zero external dependencies.
-- **Data** — `ConcreteRecipeRepository` fetches from `RecipeDataSource` (protocol), maps `RecipeResponse` → `Recipe`, applies all query filters.
+- **Data** — `ConcreteRecipeRepository` passes the full `RecipeQuery` to `RecipeDataSource` (protocol), maps `RecipeResponse` → `Recipe`, and applies all query filters. `LocalRecipeDataSource` ignores the query and returns the full dataset; a remote implementation would serialize the query into URL query items and let the server filter instead.
 - **Presentation** — `RecipeListViewModel` (@Observable) owns query state, debounces input, calls the repository. Views are driven by the ViewModel.
 
-Swapping the local JSON for a real API requires one new `RecipeDataSource` conformer and one line change in `CookMateApp.swift`.
+Swapping the local JSON for a real API requires one new `RecipeDataSource` conformer — the repository, ViewModel, and views are unchanged. The conformer receives a `RecipeQuery` and is responsible for translating it into the appropriate request parameters.
 
 ## Key Design Decisions
 
 **`RecipeDataSource` protocol over concrete type**
-`ConcreteRecipeRepository` depends on the protocol, not `LocalRecipeDataSource`. This mirrors the structure a real API integration would use and makes the repository testable via `MockRecipeDataSource`.
+`ConcreteRecipeRepository` depends on the protocol, not `LocalRecipeDataSource`. The protocol accepts a `RecipeQuery`, mirroring the contract a real API endpoint would have. Swapping implementations (local ↔ remote) requires no changes to the repository or above. The repository is also testable via a `MockRecipeDataSource`.
 
 **No service layer**
 A service layer was considered but removed — it was a pure passthrough with no added value. The ViewModel depends directly on `RecipeRepository`. A service layer would be introduced if multiple repositories needed orchestrating.
@@ -79,5 +79,5 @@ The recipe is already in memory, passed as a value. A ViewModel would be empty b
 - No image URLs — placeholder color blocks are derived deterministically from recipe ID
 - Ingredient matching is substring-based (case-insensitive), not exact
 - Servings filter means "at least N", not exact match
-- All filtering is client-side (appropriate for local JSON at this scale)
+- Filtering is applied by `ConcreteRecipeRepository` after the full dataset is returned — appropriate for local JSON. A remote `RecipeDataSource` would serialize the query into URL query items and delegate filtering to the server.
 - No persistence — no favourites or user data

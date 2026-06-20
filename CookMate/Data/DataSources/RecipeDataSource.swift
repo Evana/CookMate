@@ -1,3 +1,3 @@
 protocol RecipeDataSource {
-    func fetchRecipes() async throws -> [RecipeResponse]
+    func fetchRecipes(query: RecipeQuery) async throws -> [RecipeResponse]
 }
