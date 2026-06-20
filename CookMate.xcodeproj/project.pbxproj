@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		081E293DAC17078E7FD50B7E /* DietaryTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E7ACB4D60E10C33DEDAE65 /* DietaryTag.swift */; };
+		647403DBA19F7B72C0691B1B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E277FCC19CB76D9E97318F3 /* Ingredient.swift */; };
+		84227100BF97FE8A6010367E /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB866C7A4990C9DCC3DC206A /* RecipeRepository.swift */; };
+		A02FD6D6B177FC45C2AB08A0 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA2BF175F2B2212998A9B /* Recipe.swift */; };
+		A95526A3B3A170185FC767F0 /* RecipeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660B5645934A2DAFA362305B /* RecipeError.swift */; };
+		DE9DA9D0914AFB28696CCE73 /* RecipeQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E2ED3160086E89A842D0FD /* RecipeQueryTests.swift */; };
+		E2FF89DBFF787E3619F0A8F8 /* RecipeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22B217DE15D25B403A363BD /* RecipeQuery.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B7B21A662FE62E0200BCA6AE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +34,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B0BA2BF175F2B2212998A9B /* Recipe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Recipe.swift; path = CookMate/Domain/Models/Recipe.swift; sourceTree = "<group>"; };
+		660B5645934A2DAFA362305B /* RecipeError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeError.swift; path = CookMate/Domain/Models/RecipeError.swift; sourceTree = "<group>"; };
+		70E2ED3160086E89A842D0FD /* RecipeQueryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeQueryTests.swift; path = CookMateTests/Domain/RecipeQueryTests.swift; sourceTree = "<group>"; };
+		73E7ACB4D60E10C33DEDAE65 /* DietaryTag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DietaryTag.swift; path = CookMate/Domain/Models/DietaryTag.swift; sourceTree = "<group>"; };
+		7E277FCC19CB76D9E97318F3 /* Ingredient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Ingredient.swift; path = CookMate/Domain/Models/Ingredient.swift; sourceTree = "<group>"; };
 		B7B21A582FE62E0100BCA6AE /* CookMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B21A652FE62E0200BCA6AE /* CookMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B21A6F2FE62E0200BCA6AE /* CookMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22B217DE15D25B403A363BD /* RecipeQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeQuery.swift; path = CookMate/Domain/Models/RecipeQuery.swift; sourceTree = "<group>"; };
+		DB866C7A4990C9DCC3DC206A /* RecipeRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecipeRepository.swift; path = CookMate/Domain/Repositories/RecipeRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +96,13 @@
 				B7B21A682FE62E0200BCA6AE /* CookMateTests */,
 				B7B21A722FE62E0200BCA6AE /* CookMateUITests */,
 				B7B21A592FE62E0100BCA6AE /* Products */,
+				660B5645934A2DAFA362305B /* RecipeError.swift */,
+				73E7ACB4D60E10C33DEDAE65 /* DietaryTag.swift */,
+				7E277FCC19CB76D9E97318F3 /* Ingredient.swift */,
+				2B0BA2BF175F2B2212998A9B /* Recipe.swift */,
+				D22B217DE15D25B403A363BD /* RecipeQuery.swift */,
+				DB866C7A4990C9DCC3DC206A /* RecipeRepository.swift */,
+				70E2ED3160086E89A842D0FD /* RecipeQueryTests.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,8 +135,6 @@
 				B7B21A5A2FE62E0100BCA6AE /* CookMate */,
 			);
 			name = CookMate;
-			packageProductDependencies = (
-			);
 			productName = CookMate;
 			productReference = B7B21A582FE62E0100BCA6AE /* CookMate.app */;
 			productType = "com.apple.product-type.application";
@@ -134,8 +156,6 @@
 				B7B21A682FE62E0200BCA6AE /* CookMateTests */,
 			);
 			name = CookMateTests;
-			packageProductDependencies = (
-			);
 			productName = CookMateTests;
 			productReference = B7B21A652FE62E0200BCA6AE /* CookMateTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -157,8 +177,6 @@
 				B7B21A722FE62E0200BCA6AE /* CookMateUITests */,
 			);
 			name = CookMateUITests;
-			packageProductDependencies = (
-			);
 			productName = CookMateUITests;
 			productReference = B7B21A6F2FE62E0200BCA6AE /* CookMateUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -236,6 +254,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A95526A3B3A170185FC767F0 /* RecipeError.swift in Sources */,
+				081E293DAC17078E7FD50B7E /* DietaryTag.swift in Sources */,
+				647403DBA19F7B72C0691B1B /* Ingredient.swift in Sources */,
+				A02FD6D6B177FC45C2AB08A0 /* Recipe.swift in Sources */,
+				E2FF89DBFF787E3619F0A8F8 /* RecipeQuery.swift in Sources */,
+				84227100BF97FE8A6010367E /* RecipeRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9DA9D0914AFB28696CCE73 /* RecipeQueryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
