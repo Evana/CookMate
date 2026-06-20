@@ -9,25 +9,26 @@ struct RecipeListView: View {
 
     var body: some View {
         Group {
-            if viewModel.isLoading && viewModel.recipes.isEmpty {
+            switch viewModel.state {
+            case .loading:
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let error = viewModel.error {
+            case .error(let error):
                 ContentUnavailableView(
                     "Could Not Load Recipes",
                     systemImage: "exclamationmark.triangle",
                     description: Text(error.localizedDescription)
                 )
-            } else if viewModel.recipes.isEmpty {
+            case .empty:
                 ContentUnavailableView(
                     "No Recipes Found",
                     systemImage: "fork.knife",
                     description: Text("Try adjusting your search or filters.")
                 )
-            } else {
+            case .loaded(let recipes):
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(viewModel.recipes) { recipe in
+                        ForEach(recipes) { recipe in
                             NavigationLink(value: recipe) {
                                 RecipeCardView(recipe: recipe)
                             }

@@ -4,10 +4,15 @@ import Observation
 @MainActor
 final class RecipeListViewModel {
 
+    enum State {
+        case loading
+        case loaded([Recipe])
+        case empty
+        case error(Error)
+    }
+
     var query = RecipeQuery()
-    var recipes: [Recipe] = []
-    var isLoading = false
-    var error: Error?
+    var state: State = .loading
 
     private let repository: RecipeRepository
     private let debounceMilliseconds: Int
@@ -32,13 +37,14 @@ final class RecipeListViewModel {
     }
 
     func load() async {
-        isLoading = true
-        error = nil
-        defer { isLoading = false }
+        state = .loading
         do {
-            recipes = try await repository.fetchRecipes(query: query)
+            let recipes = try await repository.fetchRecipes(query: query)
+            state = recipes.isEmpty ? .empty : .loaded(recipes)
+        } catch is CancellationError {
+            // no-op: a new task will update state
         } catch {
-            self.error = error
+            state = .error(error)
         }
     }
 }

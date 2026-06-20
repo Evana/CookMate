@@ -13,32 +13,41 @@ struct RecipeListViewModelTests {
         self.sut = RecipeListViewModel(repository: repo, debounceMilliseconds: 0)
     }
 
-    @Test func load_populatesRecipes() async {
+    @Test func load_setsLoadedState_withRecipes() async {
         mockRepository.recipesToReturn = [.fixture(title: "Pasta"), .fixture(title: "Salad")]
         await sut.load()
-        #expect(sut.recipes.count == 2)
+        guard case .loaded(let recipes) = sut.state else {
+            Issue.record("Expected .loaded state"); return
+        }
+        #expect(recipes.count == 2)
     }
 
-    @Test func load_setsIsLoading_falseAfterCompletion() async {
+    @Test func load_setsEmptyState_whenNoResults() async {
+        mockRepository.recipesToReturn = []
         await sut.load()
-        #expect(!sut.isLoading)
+        guard case .empty = sut.state else {
+            Issue.record("Expected .empty state"); return
+        }
     }
 
-    @Test func load_setsError_whenRepositoryThrows() async {
+    @Test func load_setsErrorState_whenRepositoryThrows() async {
         mockRepository.shouldThrow = true
         await sut.load()
-        #expect(sut.error != nil)
-        #expect(sut.recipes.isEmpty)
+        guard case .error = sut.state else {
+            Issue.record("Expected .error state"); return
+        }
     }
 
-    @Test func load_clearsError_onSuccessAfterFailure() async {
+    @Test func load_recoversToLoadedState_afterError() async {
         mockRepository.shouldThrow = true
         await sut.load()
         mockRepository.shouldThrow = false
         mockRepository.recipesToReturn = [.fixture()]
         await sut.load()
-        #expect(sut.error == nil)
-        #expect(sut.recipes.count == 1)
+        guard case .loaded(let recipes) = sut.state else {
+            Issue.record("Expected .loaded state"); return
+        }
+        #expect(recipes.count == 1)
     }
 
     @Test func onQueryChanged_triggersLoad() async {
@@ -46,7 +55,10 @@ struct RecipeListViewModelTests {
         sut.query.searchText = "pasta"
         sut.onQueryChanged()
         try? await Task.sleep(for: .milliseconds(10))
-        #expect(sut.recipes.count == 1)
+        guard case .loaded(let recipes) = sut.state else {
+            Issue.record("Expected .loaded state"); return
+        }
+        #expect(recipes.count == 1)
     }
 
     @Test func onQueryChanged_cancelsInFlight_whenCalledAgain() async {
@@ -54,6 +66,9 @@ struct RecipeListViewModelTests {
         sut.onQueryChanged()
         sut.onQueryChanged()
         try? await Task.sleep(for: .milliseconds(10))
-        #expect(sut.recipes.count == 1)
+        guard case .loaded(let recipes) = sut.state else {
+            Issue.record("Expected .loaded state"); return
+        }
+        #expect(recipes.count == 1)
     }
 }

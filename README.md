@@ -65,6 +65,9 @@ A service layer was considered but removed — it was a pure passthrough with no
 **`RecipeQuery` uses `[DietaryTag]` not `Set`**
 Preserves insertion order (useful for displaying active filters). Uniqueness enforced via `toggleTag(_:)`.
 
+**`RecipeListViewModel.State` enum over scattered booleans**
+The ViewModel exposes a single `state: State` (`loading`, `loaded`, `empty`, `error`) instead of separate `isLoading`, `recipes`, and `error` properties. This eliminates impossible states (e.g. `isLoading=true` alongside `error != nil`) and lets the view use an exhaustive `switch` with no nested conditions. `CancellationError` is explicitly ignored so a cancelled in-flight search never flashes an error UI.
+
 **Debounce via Task cancellation**
 Real-time search debounce is implemented by cancelling the previous `Task` before sleeping 300ms. No Combine dependency needed.
 
