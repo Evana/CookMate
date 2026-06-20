@@ -3,6 +3,8 @@ import SwiftUI
 struct RecipeListView: View {
     var viewModel: RecipeListViewModel
 
+    @State private var isFilterSheetPresented = false
+
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
@@ -38,12 +40,31 @@ struct RecipeListView: View {
         .onChange(of: viewModel.query.searchText) {
             viewModel.onQueryChanged()
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    isFilterSheetPresented = true
+                } label: {
+                    Label("Filter", systemImage: activeFilterCount > 0
+                          ? "line.3.horizontal.decrease.circle.fill"
+                          : "line.3.horizontal.decrease.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $isFilterSheetPresented) {
+            FilterSheetView(viewModel: viewModel)
+        }
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeDetailView(recipe: recipe)
         }
         .task {
             await viewModel.start()
         }
+    }
+
+    private var activeFilterCount: Int {
+        (viewModel.query.minServings != nil ? 1 : 0) +
+        viewModel.query.dietaryTags.count
     }
 }
 
