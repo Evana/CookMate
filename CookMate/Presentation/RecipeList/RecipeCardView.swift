@@ -28,6 +28,7 @@ struct RecipeCardView: View {
             }
             .padding(10)
         }
+        .frame(maxHeight: .infinity, alignment: .top)
         .background(.background)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
