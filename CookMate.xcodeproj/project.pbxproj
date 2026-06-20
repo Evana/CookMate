@@ -254,12 +254,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A95526A3B3A170185FC767F0 /* RecipeError.swift in Sources */,
-				081E293DAC17078E7FD50B7E /* DietaryTag.swift in Sources */,
-				647403DBA19F7B72C0691B1B /* Ingredient.swift in Sources */,
-				A02FD6D6B177FC45C2AB08A0 /* Recipe.swift in Sources */,
-				E2FF89DBFF787E3619F0A8F8 /* RecipeQuery.swift in Sources */,
-				84227100BF97FE8A6010367E /* RecipeRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
