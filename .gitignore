@@ -1,0 +1,6 @@
+# Superpowers (local tooling)
+.superpowers/
+docs/superpowers/
+
+# Xcode user-specific data
+CookMate.xcodeproj/xcuserdata/
