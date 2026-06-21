@@ -13,51 +13,16 @@ A native iOS recipe browsing app built with Swift and SwiftUI.
 
 MVVM + Clean Architecture with strict layer separation.
 
-```mermaid
-graph TD
-    subgraph Presentation
-        App[CookMateApp]
-        VM[RecipeListViewModel]
-        RLV[RecipeListView]
-        RDV[RecipeDetailView]
-        FSV[FilterSheetView]
-    end
-
-    subgraph Domain
-        RP([RecipeRepository\nprotocol])
-        Recipe[Recipe]
-        RQ[RecipeQuery]
-        DT[DietaryTag]
-    end
-
-    subgraph Data
-        CRR[ConcreteRecipeRepository]
-        DS([RecipeDataSource\nprotocol])
-        LDS[LocalRecipeDataSource]
-        JSON[(recipes.json)]
-    end
-
-    App --> VM
-    App --> RLV
-    RLV --> RDV
-    RLV --> FSV
-    VM --> RP
-    CRR -- implements --> RP
-    CRR --> DS
-    LDS -- implements --> DS
-    LDS --> JSON
-```
-
 - **Domain** — pure Swift. `Recipe`, `RecipeQuery`, `DietaryTag`, `RecipeRepository` protocol. Zero external dependencies.
-- **Data** — `ConcreteRecipeRepository` passes the full `RecipeQuery` to `RecipeDataSource` (protocol), maps `RecipeResponse` → `Recipe`, and applies all query filters. `LocalRecipeDataSource` ignores the query and returns the full dataset; a remote implementation would serialize the query into URL query items and let the server filter instead.
+- **Data** — `ConcreteRecipeRepository` passes the full `RecipeQuery` to `RecipeDataSource` (protocol), maps `RecipeResponse` → `Recipe`, and applies all query filters client-side. `RecipeServiceDataSource` serializes the query into URL query items (`q=`, `minServings=`, `tags=`, `include=`, `exclude=`) on every request — a real server would use them for server-side filtering; the bundled file URL ignores them. It defaults to the local `recipes.json` bundle resource and uses the same URLSession path for both local and remote endpoints.
 - **Presentation** — `RecipeListViewModel` (@Observable) owns query state, debounces input, calls the repository. Views are driven by the ViewModel.
 
-Swapping the local JSON for a real API requires one new `RecipeDataSource` conformer — the repository, ViewModel, and views are unchanged. The conformer receives a `RecipeQuery` and is responsible for translating it into the appropriate request parameters.
+Swapping the local JSON for a real API requires only a new endpoint URL — pass it to `RecipeServiceDataSource(endpoint:)`. The repository, ViewModel, and views are unchanged. A fully custom data source (e.g. GraphQL) would implement the `RecipeDataSource` protocol directly.
 
 ## Key Design Decisions
 
 **`RecipeDataSource` protocol over concrete type**
-`ConcreteRecipeRepository` depends on the protocol, not `LocalRecipeDataSource`. The protocol accepts a `RecipeQuery`, mirroring the contract a real API endpoint would have. Swapping implementations (local ↔ remote) requires no changes to the repository or above. The repository is also testable via a `MockRecipeDataSource`.
+`ConcreteRecipeRepository` depends on the protocol, not `RecipeServiceDataSource`. The protocol accepts a `RecipeQuery`, mirroring the contract a real API endpoint would have. Swapping implementations (local ↔ remote) requires no changes to the repository or above. The repository is also testable via a `MockRecipeDataSource`.
 
 **No service layer**
 A service layer was considered but removed — it was a pure passthrough with no added value. The ViewModel depends directly on `RecipeRepository`. A service layer would be introduced if multiple repositories needed orchestrating.
@@ -79,5 +44,5 @@ The recipe is already in memory, passed as a value. A ViewModel would be empty b
 - No image URLs — placeholder color blocks are derived deterministically from recipe ID
 - Ingredient matching is substring-based (case-insensitive), not exact
 - Servings filter means "at least N", not exact match
-- Filtering is applied by `ConcreteRecipeRepository` after the full dataset is returned — appropriate for local JSON. A remote `RecipeDataSource` would serialize the query into URL query items and delegate filtering to the server.
+- Filtering is applied by `ConcreteRecipeRepository` after the full dataset is returned — appropriate for local JSON. `RecipeServiceDataSource` already serializes the query into URL query items; pointing it at a real server would delegate filtering there instead.
 - No persistence — no favourites or user data
