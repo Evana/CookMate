@@ -14,7 +14,7 @@ struct ServingsStepperView: View {
                     get: { viewModel.query.minServings ?? 0 },
                     set: { newValue in
                         viewModel.query.minServings = newValue == 0 ? nil : newValue
-                        viewModel.onQueryChanged()
+                        viewModel.applyFilters()
                     }
                 ),
                 in: 0...20
@@ -34,7 +34,7 @@ struct ServingsStepperView: View {
 #Preview {
     Form {
         ServingsStepperView(viewModel: RecipeListViewModel(
-            repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+            repository: ConcreteRecipeRepository(dataSource: RecipeServiceDataSource())
         ))
     }
 }

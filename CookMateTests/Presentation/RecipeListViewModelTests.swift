@@ -10,7 +10,7 @@ struct RecipeListViewModelTests {
     init() {
         let repo = MockRecipeRepository()
         self.mockRepository = repo
-        self.viewModel = RecipeListViewModel(repository: repo)
+        self.viewModel = RecipeListViewModel(repository: repo, debounceInterval: .milliseconds(0))
     }
 
     @Test func load_setsLoadedState_withRecipes() async {
@@ -54,7 +54,7 @@ struct RecipeListViewModelTests {
         mockRepository.recipesToReturn = [.fixture(title: "Pasta")]
         viewModel.query.searchText = "pasta"
         viewModel.onQueryChanged()
-        try? await Task.sleep(for: .milliseconds(310))
+        await Task.yield()
         guard case .loaded(let recipes) = viewModel.state else {
             Issue.record("Expected .loaded state"); return
         }
@@ -65,7 +65,7 @@ struct RecipeListViewModelTests {
         mockRepository.recipesToReturn = [.fixture()]
         viewModel.onQueryChanged()
         viewModel.onQueryChanged()
-        try? await Task.sleep(for: .milliseconds(310))
+        await Task.yield()
         guard case .loaded(let recipes) = viewModel.state else {
             Issue.record("Expected .loaded state"); return
         }

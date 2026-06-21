@@ -21,7 +21,7 @@ struct RecipeQuery: Sendable {
         if !searchText.isEmpty {
             let text = searchText.lowercased()
             let inTitle = recipe.title.lowercased().contains(text)
-            let inInstructions = recipe.instructions.joined().lowercased().contains(text)
+            let inInstructions = recipe.instructions.joined(separator: " ").lowercased().contains(text)
             guard inTitle || inInstructions else { return false }
         }
 

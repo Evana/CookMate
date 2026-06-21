@@ -12,7 +12,7 @@ struct CookMateApp: App {
 
     @State private var viewModel = RecipeListViewModel(
         repository: ConcreteRecipeRepository(
-            dataSource: LocalRecipeDataSource()
+            dataSource: RecipeServiceDataSource()
         )
     )
 

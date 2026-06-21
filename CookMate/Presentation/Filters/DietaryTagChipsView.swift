@@ -9,7 +9,7 @@ struct DietaryTagChipsView: View {
                 ForEach(DietaryTag.allCases, id: \.self) { tag in
                     Button(tag.displayName) {
                         viewModel.query.toggleTag(tag)
-                        viewModel.onQueryChanged()
+                        viewModel.applyFilters()
                     }
                     .buttonStyle(ChipButtonStyle(isSelected: viewModel.query.hasTag(tag)))
                 }
@@ -21,7 +21,7 @@ struct DietaryTagChipsView: View {
 
 #Preview {
     DietaryTagChipsView(viewModel: RecipeListViewModel(
-        repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+        repository: ConcreteRecipeRepository(dataSource: RecipeServiceDataSource())
     ))
     .padding()
 }

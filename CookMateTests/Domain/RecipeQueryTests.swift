@@ -35,4 +35,31 @@ struct RecipeQueryTests {
         query.toggleTag(.glutenFree) // re-add
         #expect(query.dietaryTags.filter { $0 == .glutenFree }.count == 1)
     }
+
+    @Test func matches_whitespaceOnlySearch_doesNotFilter() {
+        var query = RecipeQuery()
+        query.searchText = "   "
+        let recipe = Recipe.fixture(title: "Pasta")
+        #expect(query.matches(recipe))
+    }
+
+    @Test func matches_instructionSearch_doesNotJoinAcrossWordBoundaries() {
+        let recipe = Recipe.fixture(instructions: ["boil pasta", "add sauce"])
+        var query = RecipeQuery()
+        query.searchText = "pastaadd"
+        #expect(!query.matches(recipe))
+    }
+
+    @Test func clearFilters_preservesSearchText_andResetsFilters() {
+        var query = RecipeQuery()
+        query.searchText = "pasta"
+        query.minServings = 4
+        query.toggleTag(.vegetarian)
+        let search = query.searchText
+        query = RecipeQuery()
+        query.searchText = search
+        #expect(query.searchText == "pasta")
+        #expect(query.minServings == nil)
+        #expect(query.dietaryTags.isEmpty)
+    }
 }

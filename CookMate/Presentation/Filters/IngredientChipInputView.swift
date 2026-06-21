@@ -65,7 +65,7 @@ struct IngredientChipInputView: View {
         guard !trimmed.isEmpty else { return }
         guard !chips.map(\.name).contains(trimmed.lowercased()) else { return }
         viewModel.query.includeIngredients.append(trimmed.lowercased())
-        viewModel.onQueryChanged()
+        viewModel.applyFilters()
         inputText = ""
     }
 
@@ -77,26 +77,26 @@ struct IngredientChipInputView: View {
             viewModel.query.excludeIngredients.removeAll { $0 == chip.name }
             viewModel.query.includeIngredients.append(chip.name)
         }
-        viewModel.onQueryChanged()
+        viewModel.applyFilters()
     }
 
     private func removeChip(_ chip: IngredientChip) {
         viewModel.query.includeIngredients.removeAll { $0 == chip.name }
         viewModel.query.excludeIngredients.removeAll { $0 == chip.name }
-        viewModel.onQueryChanged()
+        viewModel.applyFilters()
     }
 }
 
 private struct IngredientChip: Identifiable {
     let name: String
     let isInclude: Bool
-    var id: String { "\(name)-\(isInclude)" }
+    var id: String { name }
 }
 
 #Preview {
     Form {
         IngredientChipInputView(viewModel: RecipeListViewModel(
-            repository: ConcreteRecipeRepository(dataSource: LocalRecipeDataSource())
+            repository: ConcreteRecipeRepository(dataSource: RecipeServiceDataSource())
         ))
     }
 }

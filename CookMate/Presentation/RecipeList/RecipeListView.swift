@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RecipeListView: View {
-    var viewModel: RecipeListViewModel
+    @Bindable var viewModel: RecipeListViewModel
 
     @State private var isFilterSheetPresented = false
 
@@ -14,11 +14,16 @@ struct RecipeListView: View {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .error(let error):
-                ContentUnavailableView(
-                    "Could Not Load Recipes",
-                    systemImage: "exclamationmark.triangle",
-                    description: Text(error.localizedDescription)
-                )
+                ContentUnavailableView {
+                    Label("Could Not Load Recipes", systemImage: "exclamationmark.triangle")
+                } description: {
+                    Text(error.localizedDescription)
+                } actions: {
+                    Button("Try Again") {
+                        Task { await viewModel.loadRecipes() }
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
             case .empty:
                 ContentUnavailableView(
                     "No Recipes Found",
@@ -40,10 +45,7 @@ struct RecipeListView: View {
             }
         }
         .navigationTitle("Recipes")
-        .searchable(text: Binding(
-            get: { viewModel.query.searchText },
-            set: { viewModel.query.searchText = $0 }
-        ), prompt: "Search recipes")
+        .searchable(text: $viewModel.query.searchText, prompt: "Search recipes")
         .onChange(of: viewModel.query.searchText) {
             viewModel.onQueryChanged()
         }
@@ -52,7 +54,7 @@ struct RecipeListView: View {
                 Button {
                     isFilterSheetPresented = true
                 } label: {
-                    Label("Filter", systemImage: activeFilterCount > 0
+                    Label("Filter", systemImage: viewModel.activeFilterCount > 0
                           ? "line.3.horizontal.decrease.circle.fill"
                           : "line.3.horizontal.decrease.circle")
                 }
@@ -69,20 +71,12 @@ struct RecipeListView: View {
         }
     }
 
-    private var activeFilterCount: Int {
-        (viewModel.query.minServings != nil ? 1 : 0)
-        + viewModel.query.dietaryTags.count
-        + viewModel.query.includeIngredients.count
-        + viewModel.query.excludeIngredients.count
-    }
 }
 
 #Preview {
     NavigationStack {
-        RecipeListView(viewModel: {
-            let dataSource = LocalRecipeDataSource()
-            let repository = ConcreteRecipeRepository(dataSource: dataSource)
-            return RecipeListViewModel(repository: repository)
-        }())
+        RecipeListView(viewModel: RecipeListViewModel(
+            repository: ConcreteRecipeRepository(dataSource: RecipeServiceDataSource())
+        ))
     }
 }
