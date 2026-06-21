@@ -56,7 +56,7 @@ struct RecipeDetailView: View {
 
             ForEach(recipe.ingredients) { ingredient in
                 HStack {
-                    Text(ingredient.name)
+                    Text(ingredient.name.capitalized)
                         .font(.body)
                     Spacer()
                     Text(ingredient.quantity)
