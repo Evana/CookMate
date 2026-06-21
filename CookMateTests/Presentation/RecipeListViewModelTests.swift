@@ -54,7 +54,7 @@ struct RecipeListViewModelTests {
         mockRepository.recipesToReturn = [.fixture(title: "Pasta")]
         viewModel.query.searchText = "pasta"
         viewModel.onQueryChanged()
-        await Task.yield()
+        try? await Task.sleep(for: .milliseconds(50))
         guard case .loaded(let recipes) = viewModel.state else {
             Issue.record("Expected .loaded state"); return
         }
@@ -65,7 +65,7 @@ struct RecipeListViewModelTests {
         mockRepository.recipesToReturn = [.fixture()]
         viewModel.onQueryChanged()
         viewModel.onQueryChanged()
-        await Task.yield()
+        try? await Task.sleep(for: .milliseconds(50))
         guard case .loaded(let recipes) = viewModel.state else {
             Issue.record("Expected .loaded state"); return
         }

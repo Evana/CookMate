@@ -1,3 +1,5 @@
+import Foundation
+
 struct RecipeQuery: Sendable {
     var searchText: String = ""
     private(set) var dietaryTags: [DietaryTag] = []
@@ -18,8 +20,9 @@ struct RecipeQuery: Sendable {
     }
 
     func matches(_ recipe: Recipe) -> Bool {
-        if !searchText.isEmpty {
-            let text = searchText.lowercased()
+        let trimmedSearch = searchText.trimmingCharacters(in: .whitespaces)
+        if !trimmedSearch.isEmpty {
+            let text = trimmedSearch.lowercased()
             let inTitle = recipe.title.lowercased().contains(text)
             let inInstructions = recipe.instructions.joined(separator: " ").lowercased().contains(text)
             guard inTitle || inInstructions else { return false }

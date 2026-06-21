@@ -48,10 +48,12 @@ final class RecipeListViewModel {
     func onQueryChanged() {
         searchTask?.cancel()
         searchTask = Task {
-            do {
-                try await Task.sleep(for: self.debounceInterval)
-            } catch {
-                return  // CancellationError — a new task will update state
+            if self.debounceInterval > .zero {
+                do {
+                    try await Task.sleep(for: self.debounceInterval)
+                } catch {
+                    return  // CancellationError — a new task will update state
+                }
             }
             await self.loadRecipes()
         }
