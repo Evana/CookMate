@@ -73,7 +73,7 @@ struct RecipeDetailView: View {
                 .font(.headline)
 
             ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, step in
-                HStack(alignment: .top, spacing: 14) {
+                HStack(alignment: .center, spacing: 14) {
                     Text("\(index + 1)")
                         .font(.subheadline)
                         .fontWeight(.bold)

@@ -2,8 +2,11 @@ import Foundation
 
 extension Recipe {
     init(response: RecipeResponse) throws {
+        guard let id = UUID(uuidString: response.id) else {
+            throw RecipeError.decodingFailed
+        }
         self.init(
-            id: UUID(uuidString: response.id) ?? UUID(),
+            id: id,
             title: response.title,
             description: response.description,
             servings: response.servings,

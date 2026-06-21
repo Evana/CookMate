@@ -1,6 +1,6 @@
 import Foundation
 
-struct Recipe: Identifiable, Hashable {
+struct Recipe: Identifiable, Hashable, Sendable {
     let id: UUID
     let title: String
     let description: String

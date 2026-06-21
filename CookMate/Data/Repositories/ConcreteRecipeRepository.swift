@@ -1,4 +1,4 @@
-final class ConcreteRecipeRepository: RecipeRepository {
+final class ConcreteRecipeRepository: RecipeRepository, Sendable {
 
     private let dataSource: RecipeDataSource
 

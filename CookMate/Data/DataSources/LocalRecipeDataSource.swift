@@ -1,6 +1,6 @@
 import Foundation
 
-final class LocalRecipeDataSource: RecipeDataSource {
+struct LocalRecipeDataSource: RecipeDataSource {
     func fetchRecipes(query: RecipeQuery) async throws -> [RecipeResponse] {
         // `query` is intentionally unused here — a remote implementation would
         // serialize it into URL query items and let the server filter.
@@ -8,10 +8,10 @@ final class LocalRecipeDataSource: RecipeDataSource {
         guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
             throw RecipeError.fileNotFound
         }
-        let data = try Data(contentsOf: url)
         do {
+            let data = try Data(contentsOf: url)
             return try JSONDecoder().decode([RecipeResponse].self, from: data)
-        } catch {
+        } catch is DecodingError {
             throw RecipeError.decodingFailed
         }
     }

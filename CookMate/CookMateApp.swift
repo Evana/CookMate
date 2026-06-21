@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct CookMateApp: App {
 
-    private let viewModel: RecipeListViewModel = {
-        let dataSource = LocalRecipeDataSource()
-        let repository = ConcreteRecipeRepository(dataSource: dataSource)
-        return RecipeListViewModel(repository: repository)
-    }()
+    @State private var viewModel = RecipeListViewModel(
+        repository: ConcreteRecipeRepository(
+            dataSource: LocalRecipeDataSource()
+        )
+    )
 
     var body: some Scene {
         WindowGroup {

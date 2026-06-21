@@ -1,6 +1,7 @@
 import Testing
 @testable import CookMate
 
+@MainActor
 struct ConcreteRecipeRepositoryTests {
 
     var dataSource: MockRecipeDataSource

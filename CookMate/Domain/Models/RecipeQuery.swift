@@ -1,4 +1,4 @@
-struct RecipeQuery {
+struct RecipeQuery: Sendable {
     var searchText: String = ""
     private(set) var dietaryTags: [DietaryTag] = []
     var minServings: Int? = nil

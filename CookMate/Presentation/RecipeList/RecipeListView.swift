@@ -65,7 +65,7 @@ struct RecipeListView: View {
             RecipeDetailView(recipe: recipe)
         }
         .task {
-            await viewModel.start()
+            await viewModel.loadRecipe()
         }
     }
 

@@ -12,31 +12,26 @@ final class RecipeListViewModel {
     }
 
     var query = RecipeQuery()
-    var state: State = .loading
+    private(set) var state: State = .loading
 
     private let repository: RecipeRepository
-    private let debounceMilliseconds: Int
+    private let debounceInterval: Duration = .milliseconds(300)
     private var searchTask: Task<Void, Never>?
 
-    init(repository: RecipeRepository, debounceMilliseconds: Int = 300) {
+    init(repository: RecipeRepository) {
         self.repository = repository
-        self.debounceMilliseconds = debounceMilliseconds
-    }
-
-    func start() async {
-        await load()
     }
 
     func onQueryChanged() {
         searchTask?.cancel()
-        searchTask = Task { [debounceMilliseconds] in
-            try? await Task.sleep(for: .milliseconds(debounceMilliseconds))
+        searchTask = Task { [debounceInterval] in
+            try? await Task.sleep(for: debounceInterval)
             guard !Task.isCancelled else { return }
-            await self.load()
+            await self.loadRecipe()
         }
     }
 
-    func load() async {
+    func loadRecipe() async {
         state = .loading
         do {
             let recipes = try await repository.fetchRecipes(query: query)

@@ -1,6 +1,6 @@
 @testable import CookMate
 
-final class MockRecipeRepository: RecipeRepository {
+final class MockRecipeRepository: RecipeRepository, @unchecked Sendable {
     var recipesToReturn: [Recipe] = []
     var shouldThrow = false
 
