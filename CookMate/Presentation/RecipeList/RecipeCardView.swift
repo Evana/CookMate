@@ -41,7 +41,7 @@ struct RecipeCardView: View {
         title: "Spaghetti Carbonara",
         description: "A classic Roman pasta dish.",
         servings: 4,
-        ingredients: [Ingredient(name: "spaghetti", quantity: "200g")],
+        ingredients: [Ingredient(id: UUID(), name: "spaghetti", quantity: "200g")],
         instructions: ["Boil pasta", "Mix with egg"],
         dietaryTags: [.vegetarian, .glutenFree]
     ))

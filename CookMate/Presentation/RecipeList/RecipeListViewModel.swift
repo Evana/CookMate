@@ -27,11 +27,11 @@ final class RecipeListViewModel {
         searchTask = Task { [debounceInterval] in
             try? await Task.sleep(for: debounceInterval)
             guard !Task.isCancelled else { return }
-            await self.loadRecipe()
+            await self.loadRecipes()
         }
     }
 
-    func loadRecipe() async {
+    func loadRecipes() async {
         state = .loading
         do {
             let recipes = try await repository.fetchRecipes(query: query)
@@ -40,6 +40,17 @@ final class RecipeListViewModel {
             // no-op: a new task will update state
         } catch {
             state = .error(error)
+        }
+    }
+}
+
+extension RecipeListViewModel.State: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.empty, .empty): true
+        case (.loaded(let a), .loaded(let b)):        a == b
+        case (.error, .error):                        true
+        default:                                      false
         }
     }
 }

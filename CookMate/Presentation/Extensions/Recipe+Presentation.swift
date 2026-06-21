@@ -9,6 +9,6 @@ extension Recipe {
             .purple.opacity(0.65),
             .pink.opacity(0.65)
         ]
-        return colors[abs(id.hashValue) % colors.count]
+        return colors[Int(id.uuid.0) % colors.count]
     }
 }

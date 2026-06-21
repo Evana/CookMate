@@ -54,7 +54,7 @@ struct RecipeDetailView: View {
             Text("Ingredients")
                 .font(.headline)
 
-            ForEach(recipe.ingredients, id: \.name) { ingredient in
+            ForEach(recipe.ingredients) { ingredient in
                 HStack {
                     Text(ingredient.name)
                         .font(.body)
@@ -99,10 +99,10 @@ struct RecipeDetailView: View {
             description: "A classic Roman pasta dish made with egg, cheese, pancetta and pepper.",
             servings: 4,
             ingredients: [
-                Ingredient(name: "spaghetti", quantity: "200g"),
-                Ingredient(name: "pancetta", quantity: "100g"),
-                Ingredient(name: "eggs", quantity: "2 large"),
-                Ingredient(name: "pecorino", quantity: "50g")
+                Ingredient(id: UUID(), name: "spaghetti", quantity: "200g"),
+                Ingredient(id: UUID(), name: "pancetta", quantity: "100g"),
+                Ingredient(id: UUID(), name: "eggs", quantity: "2 large"),
+                Ingredient(id: UUID(), name: "pecorino", quantity: "50g")
             ],
             instructions: [
                 "Cook spaghetti in salted boiling water until al dente.",

@@ -25,7 +25,9 @@ struct FilterSheetView: View {
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Clear All") {
+                        let currentSearch = viewModel.query.searchText
                         viewModel.query = RecipeQuery()
+                        viewModel.query.searchText = currentSearch
                         viewModel.onQueryChanged()
                     }
                 }

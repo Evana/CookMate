@@ -7,7 +7,7 @@ extension Recipe {
         title: String = "Test Recipe",
         description: String = "A test description",
         servings: Int = 4,
-        ingredients: [Ingredient] = [Ingredient(name: "flour", quantity: "200g")],
+        ingredients: [Ingredient] = [Ingredient(id: UUID(), name: "flour", quantity: "200g")],
         instructions: [String] = ["Step one"],
         dietaryTags: [DietaryTag] = []
     ) -> Recipe {

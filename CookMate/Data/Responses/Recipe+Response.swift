@@ -11,7 +11,7 @@ extension Recipe {
             description: response.description,
             servings: response.servings,
             ingredients: response.ingredients.map {
-                Ingredient(name: $0.name, quantity: $0.quantity)
+                Ingredient(id: UUID(), name: $0.name, quantity: $0.quantity)
             },
             instructions: response.instructions,
             dietaryTags: response.dietaryTags.compactMap { DietaryTag(rawValue: $0) }

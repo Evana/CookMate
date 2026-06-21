@@ -65,13 +65,15 @@ struct RecipeListView: View {
             RecipeDetailView(recipe: recipe)
         }
         .task {
-            await viewModel.loadRecipe()
+            await viewModel.loadRecipes()
         }
     }
 
     private var activeFilterCount: Int {
-        (viewModel.query.minServings != nil ? 1 : 0) +
-        viewModel.query.dietaryTags.count
+        (viewModel.query.minServings != nil ? 1 : 0)
+        + viewModel.query.dietaryTags.count
+        + viewModel.query.includeIngredients.count
+        + viewModel.query.excludeIngredients.count
     }
 }
 

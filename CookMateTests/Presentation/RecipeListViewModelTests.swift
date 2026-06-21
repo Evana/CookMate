@@ -15,7 +15,7 @@ struct RecipeListViewModelTests {
 
     @Test func load_setsLoadedState_withRecipes() async {
         mockRepository.recipesToReturn = [.fixture(title: "Pasta"), .fixture(title: "Salad")]
-        await viewModel.loadRecipe()
+        await viewModel.loadRecipes()
         guard case .loaded(let recipes) = viewModel.state else {
             Issue.record("Expected .loaded state"); return
         }
@@ -24,7 +24,7 @@ struct RecipeListViewModelTests {
 
     @Test func load_setsEmptyState_whenNoResults() async {
         mockRepository.recipesToReturn = []
-        await viewModel.loadRecipe()
+        await viewModel.loadRecipes()
         guard case .empty = viewModel.state else {
             Issue.record("Expected .empty state"); return
         }
@@ -32,7 +32,7 @@ struct RecipeListViewModelTests {
 
     @Test func load_setsErrorState_whenRepositoryThrows() async {
         mockRepository.shouldThrow = true
-        await viewModel.loadRecipe()
+        await viewModel.loadRecipes()
         guard case .error = viewModel.state else {
             Issue.record("Expected .error state"); return
         }
@@ -40,10 +40,10 @@ struct RecipeListViewModelTests {
 
     @Test func load_recoversToLoadedState_afterError() async {
         mockRepository.shouldThrow = true
-        await viewModel.loadRecipe()
+        await viewModel.loadRecipes()
         mockRepository.shouldThrow = false
         mockRepository.recipesToReturn = [.fixture()]
-        await viewModel.loadRecipe()
+        await viewModel.loadRecipes()
         guard case .loaded(let recipes) = viewModel.state else {
             Issue.record("Expected .loaded state"); return
         }
